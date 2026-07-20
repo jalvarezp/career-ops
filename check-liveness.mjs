@@ -46,10 +46,19 @@ async function main() {
     process.exit(1);
   }
 
-  let urls;
+   let urls;
   if (positional[0] === '--file') {
     const text = await readFile(positional[1], 'utf-8');
-    urls = text.split('\n').map(l => l.trim()).filter(l => l && !l.startsWith('#'));
+
+    urls = text
+      .split('\n')
+      .map(line => line.trim())
+      .filter(line =>
+        line &&
+        !line.startsWith('#') &&
+        /https?:\/\//.test(line)
+      )
+      .map(line => line.match(/https?:\/\/\S+/)[0]);
   } else {
     urls = positional;
   }
