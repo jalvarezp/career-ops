@@ -289,7 +289,7 @@ LEGITIMACY: <High Confidence | Proceed with Caution | Suspicious>
 // ---------------------------------------------------------------------------
 console.log(`🤖  Calling Gemini (${modelName})... this may take 30-60 seconds.\n`);
 
-const genAI = new GoogleGenerativeAI(apiKey);
+const genAI = new GoogleGenerativeAI({ apiKey: apiKey, apiVersion: 'v1' });
 const model = genAI.getGenerativeModel({
   model: modelName,
   generationConfig: {
